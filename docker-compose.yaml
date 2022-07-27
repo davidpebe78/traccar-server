@@ -3,6 +3,7 @@ services:
   mariadb:
     image: lscr.io/linuxserver/mariadb:latest
     container_name: mariadb
+    env_file: .env
     environment:
       - PUID=1000
       - PGID=1000
@@ -21,6 +22,7 @@ services:
   traccar:
     image: ${TRACCAR_IMAGE}
     container_name: traccar
+    env_file: .env
 #   depends_on:
 #     - mariadb
     restart: unless-stopped
