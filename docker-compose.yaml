@@ -1,34 +1,5 @@
 version: "3"
 services:
-#    dbgps:
-#        image: mysql:8.0.20
-#        container_name: dbgps
-#        command: --default-authentication-plugin=mysql_native_password
-#        restart: always
-#        env_file: .env
-#        volumes:
-#            - /etc/localtime:/etc/localtime:ro
-#            - ./db:/var/lib/mysql
-#            - ./db/config:/etc/mysql/conf.d
-#            - ./db/backup:/opt/mysql/backup
-#        ports:
-#            - "3306:3306"
-
-    traccar:
-        image: ${TRACCAR_IMAGE}
-        container_name: traccar
-#        depends_on:
-#            - dbgps
-        restart: always
-        volumes:
-            - ./traccar/config/traccar.xml:/opt/traccar/conf/traccar.xml:ro
-            - ./traccar/log:/opt/traccar/logs:rw
-        ports:
-            - "5000-5150:5000-5150"
-            - "8082:8082"
-
-version: "2.1"
-services:
   mariadb:
     image: lscr.io/linuxserver/mariadb:latest
     container_name: mariadb
@@ -37,12 +8,25 @@ services:
       - PGID=1000
       - MYSQL_ROOT_PASSWORD=${PASSROOT}
       - TZ=${TZ}
-      - MYSQL_DATABASE=${DATABASE}
-      - MYSQL_USER=${USER}
-      - MYSQL_PASSWORD=${PASSUSER}
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
 
     volumes:
       - ./db/config:/config
     ports:
       - ${PORTMYSQL}:3306
     restart: unless-stopped
+
+  traccar:
+    image: ${TRACCAR_IMAGE}
+    container_name: traccar
+#   depends_on:
+#     - mariadb
+    restart: unless-stopped
+    volumes:
+      - ./traccar/config/traccar.xml:/opt/traccar/conf/traccar.xml:ro
+      - ./traccar/log:/opt/traccar/logs:rw
+    ports:
+      - "5000-5150:5000-5150"
+      - "8082:8082"
