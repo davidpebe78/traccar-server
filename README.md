@@ -7,7 +7,7 @@
    
    Creamos una carpeta donde clonaremos el repositorio, por ejemplo:
     
-        mkdir /docker
+        sudo mkdir /docker
     
    Despues clonamos el repositorio
 
@@ -15,7 +15,7 @@
 
    Tenemos que modificar el archivo .env, con los datos que necesitemos (HAY QUE CAMBIAR TODAS LAS MAYUSCULAS ENTRE [], "se quitan los []")
 
-        nano .env
+        sudo nano .env
    
    Y tambien el archivo ./traccar/config/traccar.xml con los datos que pusimos en el archivo .env
 
