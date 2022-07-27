@@ -21,7 +21,7 @@ services:
             - dbgps
         restart: always
         volumes:
-            - ./traccar/traccar/config/traccar.xml:/opt/traccar/conf/traccar.xml:ro
+            - ./traccar/traccar/conf/traccar.xml:/opt/traccar/conf/traccar.xml:ro
             - ./traccar/traccar/log:/opt/traccar/logs:rw
         ports:
             - "5000-5150:5000-5150"
