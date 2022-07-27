@@ -8,9 +8,9 @@ services:
         env_file: .env
         volumes:
             - /etc/localtime:/etc/localtime:ro
-            - ./traccar/db:/var/lib/mysql
-            - ./traccar/db/config:/etc/mysql/conf.d
-            - ./traccar/db/backup:/opt/mysql/backup
+            - ./db:/var/lib/mysql
+            - ./db/config:/etc/mysql/conf.d
+            - ./db/backup:/opt/mysql/backup
         ports:
             - "3306:3306"
 
@@ -21,8 +21,8 @@ services:
             - dbgps
         restart: always
         volumes:
-            - ./traccar/traccar/conf/traccar.xml:/opt/traccar/conf/traccar.xml:ro
-            - ./traccar/traccar/log:/opt/traccar/logs:rw
+            - ./traccar/conf/traccar.xml:/opt/traccar/conf/traccar.xml:ro
+            - ./traccar/log:/opt/traccar/logs:rw
         ports:
             - "5000-5150:5000-5150"
             - "8082:8082"
